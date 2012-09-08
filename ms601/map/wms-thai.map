@@ -1,0 +1,305 @@
+MAP
+	NAME Thai
+        STATUS ON
+        EXTENT 97.0 5.5 105.7 20.5
+        UNITS dd
+        SIZE 600 400
+        IMAGECOLOR 180 180 180
+        TRANSPARENT ON
+        IMAGETYPE png
+	FONTSET "/ms601/fonts/fonts.txt"
+	SYMBOLSET "/ms601/symbols/symbols.txt"
+	OUTPUTFORMAT
+		NAME png
+		DRIVER "GD/PNG"
+		MIMETYPE "image/png"
+		IMAGEMODE RGB
+		EXTENSION "png"
+		FORMATOPTION "INTERLACE=OFF"
+	END
+        WEB
+                IMAGEPATH '/wms/tmp/'
+                IMAGEURL "/wms/tmp/"
+		METADATA
+			"wms_title" "Thailand WMS"
+			"wms_onlineresource" "http://192.168.1.40/cgi-bin/mapserv?map=/ms601/map/wms-thai.map&"
+			"wms_srs" "EPSG:4326 EPSG:900913"
+			"wms_enable_request" "*"
+		END
+        END
+        PROJECTION
+                "proj=latlong"
+		"datum=WGS84"
+	END
+	#SYMBOL
+	#	NAME "solid" 
+	#	TYPE ellipse 
+	#	POINTS 1 1 END
+	#	FILLED true
+	#END
+
+	LAYER
+		NAME "province"
+                METADATA
+                        "wms_title" "Province"
+			"wms_srs" "EPSG:4326 EPSG:900913"
+                END
+        	PROJECTION
+                	"proj=latlong"
+			"datum=WGS84"
+		END
+		STATUS OFF
+		OPACITY 50
+		TYPE POLYGON
+		#CONNECTIONTYPE postgis
+		#CONNECTION "host=localhost dbname=gfund user=postgres"
+		#DATA "the_geom FROM provinces using unique id using srid=4326"
+		DATA "/ms601/shp/gis_province.shp"
+		LABELITEM "prov_nam_t"
+		CLASS
+			STYLE
+				ANGLE 360
+				COLOR 223 186 133
+				OUTLINECOLOR 178 99 86
+				SYMBOL 0
+			END
+			LABEL
+                                TYPE truetype
+                                FONT tahoma
+                                SIZE 12
+				COLOR 252 235 187
+				OUTLINECOLOR 144 14 53
+				POSITION uc
+                                MINDISTANCE 100
+                                ENCODING tis-620			
+			END
+		END
+	END
+
+        LAYER
+                NAME "amphoe"
+                METADATA
+                        "wms_title" "Amphoe"
+                        "wms_srs" "EPSG:4326 EPSG:900913"
+                END
+                PROJECTION
+                        "proj=latlong"
+                        "datum=WGS84"
+                END
+                STATUS OFF
+		OPACITY 50
+                TYPE POLYGON
+                CONNECTIONTYPE postgis
+                CONNECTION "host=localhost dbname=dsi user=postgres password=1234"
+                DATA "the_geom FROM no_03_amphoe using unique gid using srid=4326"
+                LABELITEM "amphoe_t"
+                CLASS
+                        STYLE
+                                ANGLE 360
+                                COLOR -1 -1 -1
+                                OUTLINECOLOR 0 110 124
+                                SYMBOL 0
+                        END
+                        LABEL
+                                TYPE truetype
+				FONT tahoma
+                                SIZE 10
+                                COLOR 133 191 203
+                                OUTLINECOLOR 0 110 124
+				POSITION ll
+                                MINDISTANCE 100
+				ENCODING tis-620
+                        END
+                END
+        END
+
+        LAYER
+                NAME "tambon"
+                METADATA
+                        "wms_title" "Tambon"
+                        "wms_srs" "EPSG:4326 EPSG:900913"
+                END
+                PROJECTION
+                        "proj=latlong"
+                        "datum=WGS84"
+                END
+                STATUS ON
+		TRANSPARENCY 0
+                TYPE POLYGON
+                CONNECTIONTYPE postgis
+                CONNECTION "host=localhost dbname=gfund user=postgres"
+                DATA "the_geom FROM tambons using unique id using srid=4326"
+                LABELITEM "tam_name"
+                CLASS
+                        STYLE
+                                ANGLE 360
+                                COLOR -1 -1 -1
+                                OUTLINECOLOR 0 135 0
+                                SYMBOL 0
+                        END
+                        LABEL
+                                TYPE truetype
+				FONT tahoma
+                                SIZE 10
+				POSITION lr
+                                MINDISTANCE 100
+				ENCODING tis-620
+                        END
+                END
+        END
+
+	LAYER
+		NAME "mainroad"
+                METADATA
+                        "wms_title" "Mainroad"
+			"wms_srs" "EPSG:4326 EPSG:900913"
+                END
+		STATUS OFF
+		TYPE line
+                CONNECTIONTYPE POSTGIS
+                CONNECTION "host=localhost dbname=gfund user=postgres"
+                DATA "the_geom FROM mainroads USING unique id USING SRID=4326"
+		LABELITEM mroad_name
+		#LABELMAXSCALE 1000000
+		TRANSPARENCY 60
+		CLASS
+			NAME Highway 
+			#STYLE 
+				#SYMBOL "circle" 
+				#SIZE 7 
+				#COLOR 0 0 0 
+			#END 
+			#STYLE
+				#SYMBOL "circle" 
+				#SIZE 5 
+				#COLOR 255 255 0 
+			#END 
+			#STYLE
+				#SYMBOL "dashed" 
+				#SIZE 1 
+				#COLOR 0 0 0 
+			#END 
+			LABEL
+				TYPE TRUETYPE
+				FONT tahoma
+				SIZE 8
+				COLOR 0 0 0
+				OUTLINECOLOR 200 200 200
+				ENCODING TIS-620
+			END
+		END
+	END
+
+	LAYER
+		NAME "road"
+                METADATA
+                        "wms_title" "Road"
+			"wms_srs" "EPSG:32647 EPSG:900913"
+                END
+		STATUS OFF
+		TYPE line
+                #CONNECTIONTYPE POSTGIS
+                #CONNECTION "host=localhost dbname=gfund user=postgres"
+                #DATA "the_geom FROM mainroads USING unique id USING SRID=4326"
+		DATA "/ms601/shp/road.shp"
+		LABELITEM name_t
+		#LABELMAXSCALE 1000000
+		TRANSPARENCY 60
+		CLASS
+			NAME Highway 
+			#STYLE 
+				#SYMBOL "circle" 
+				#SIZE 7 
+				#COLOR 0 0 0 
+			#END 
+			STYLE
+				SYMBOL "circle" 
+				SIZE 3 
+				COLOR 255 255 0 
+			END 
+			#STYLE
+				#SYMBOL "dashed" 
+				#SIZE 1 
+				#COLOR 0 0 0 
+			#END 
+			LABEL
+				TYPE TRUETYPE
+				FONT tahoma
+				SIZE 8
+				COLOR 0 0 0
+				OUTLINECOLOR 200 200 200
+				ENCODING TIS-620
+			END
+		END
+	END
+
+	LAYER
+		NAME "utm_wgs"
+                METADATA
+                        "wms_title" "utm_wgs"
+			"wms_srs" "EPSG:4326 EPSG:900913"
+                END
+		STATUS OFF
+		TYPE POLYGON
+                CONNECTIONTYPE postgis
+                CONNECTION "host=192.168.1.40 dbname=dsi user=postgres password=1234"
+                DATA "the_geom FROM utm_wgs using unique gid using srid=4326"
+                LABELITEM "zone_num"
+                #DATA "/ms601/shp/utm_wgs.shp"
+                #LABELITEM "ZONE_NUM"
+		OPACITY 30
+		CLASS
+			STYLE
+				COLOR -1 -1 -1
+                                OUTLINECOLOR 255 0 0
+                                WIDTH 2
+			END
+                        LABEL
+                                TYPE TRUETYPE
+                                FONT tahoma
+                                SIZE 8
+                                COLOR 200 0 0
+                                OUTLINECOLOR 255 255 255
+                                ENCODING TIS-620
+			END
+		END
+	END
+
+	LAYER
+		NAME "point_layer"
+                METADATA
+                        "wms_title" "Point Layer"
+			"wms_srs" "EPSG:4326 EPSG:900913"
+                END
+        	PROJECTION
+                	"proj=latlong"
+			"datum=WGS84"
+		END
+		STATUS OFF
+		OPACITY 100
+		TYPE POINT
+		CONNECTIONTYPE postgis
+		CONNECTION "host=localhost dbname=dsi user=postgres"
+		DATA "the_geom FROM point_layer using unique id using srid=4326"
+		LABELITEM "title"
+		CLASS
+			STYLE
+				ANGLE 360
+				COLOR 223 186 133
+				OUTLINECOLOR 178 99 86
+				SYMBOL point_pink
+			END
+			LABEL
+                                TYPE truetype
+                                FONT tahoma
+                                SIZE 12
+				COLOR 252 235 187
+				OUTLINECOLOR 144 14 53
+				POSITION uc
+                                MINDISTANCE 100
+                                ENCODING tis-620			
+			END
+		END
+	END
+END
+

@@ -1,0 +1,48 @@
+SYMBOL
+  NAME 'circle'
+  TYPE ELLIPSE
+  POINTS 1 1 END
+  FILLED true
+END 
+
+SYMBOL
+  NAME 'circle-dashed'
+  TYPE ELLIPSE
+  POINTS 1 1 END
+  FILLED true
+  STYLE 10 10 END
+END 
+
+SYMBOL
+  NAME 'dashed'
+  TYPE ELLIPSE
+  POINTS 1 1 END
+  FILLED true
+  STYLE 10 10 END
+END 
+
+SYMBOL
+  NAME	"solid"
+  TYPE	ellipse
+  POINTS 1 1 end
+  FILLED true
+END
+
+SYMBOL
+  NAME "triangle"
+  TYPE vector
+  POINTS 0 4 2 0 4 4 0 4 END
+END
+  
+SYMBOL
+  NAME "rectangle"
+  TYPE vector
+  POINTS 0 0 4 0 4 4 0 4 0 0 END
+END
+
+SYMBOL
+   Name 'point_pink'
+   Type PIXMAP
+   Image 'icon_point_pink.png'
+END
+

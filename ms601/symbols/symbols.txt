@@ -1,0 +1,7 @@
+SYMBOLSET
+  SYMBOL
+    NAME 'point_pink'
+    TYPE PIXMAP
+    IMAGE 'icon_marker_pink.png'
+  END
+END

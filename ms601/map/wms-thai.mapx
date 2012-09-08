@@ -1,0 +1,58 @@
+MAP
+	NAME Thai
+        STATUS ON
+        EXTENT 97.0 5.5 105.7 20.5
+        UNITS dd
+        SIZE 600 400
+        IMAGECOLOR 180 180 180
+        TRANSPARENT ON
+        IMAGETYPE png
+	FONTSET "/ms601/fonts/fonts.txt"
+        WEB
+                IMAGEPATH '/wms/tmp/'
+                IMAGEURL "/wms/tmp/"
+		METADATA
+			"wms_title" "Thailand WMS"
+			"wms_onlineresource" "http://192.168.1.40/cgi-bin/mapserv?map=/ms601/map/wms-thai.map&"
+			"wms_srs" "EPSG:4326 EPSG:900913"
+		END
+        END
+        PROJECTION
+                "proj=latlong"
+		"datum=WGS84"
+	END
+
+	LAYER
+		NAME "province"
+                METADATA
+                        "wms_title" "Province"
+			"wms_srs" "EPSG:4326 EPSG:900913"
+                END
+        	PROJECTION
+                	"proj=latlong"
+			"datum=WGS84"
+		END
+		STATUS DEFAULT
+		OPACITY 50
+		TYPE POLYGON
+		DATA "/ms601/shp/gis_province.shp"
+		LABELITEM "prov_nam_t"
+		CLASS
+			STYLE
+				ANGLE 360
+				COLOR 200 200 150
+				OUTLINECOLOR 135 135 0
+				SYMBOL 0
+			END
+			LABEL
+                                TYPE truetype
+                                FONT tahoma
+                                SIZE 14
+				POSITION uc
+                                MINDISTANCE 100
+                                ENCODING tis-620			
+			END
+		END
+	END
+END
+
